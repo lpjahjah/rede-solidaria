@@ -56,54 +56,56 @@ setupIonicReact();
 const App: React.FC = () => (
 	<IonApp>
 		<IonReactRouter>
-			<IonTabs>
-				<IonRouterOutlet>
-					<Routes />
-					{isPlatform('desktop') ? (
-						<>
-							<IonMenu contentId="main-content">
-								<IonHeader>
-									<IonToolbar>
-										<IonTitle>Menu Content</IonTitle>
-									</IonToolbar>
-								</IonHeader>
-								<IonContent className="ion-padding">
-									This is the menu content.
-								</IonContent>
-							</IonMenu>
-							<IonPage id="main-content">
-								<IonHeader>
-									<IonToolbar>
-										<IonButtons slot="start">
-											<IonMenuButton />
-										</IonButtons>
-										<IonTitle>Menu</IonTitle>
-									</IonToolbar>
-								</IonHeader>
-								<IonContent className="ion-padding">
-									Tap the button in the toolbar to open the
-									menu.
-								</IonContent>
-							</IonPage>
-						</>
-					) : (
-						<IonTabBar slot="bottom">
-							<IonTabButton tab="tab1" href="/tab1">
-								<IonIcon aria-hidden="true" icon={triangle} />
-								<IonLabel>Tab 1</IonLabel>
-							</IonTabButton>
-							<IonTabButton tab="tab2" href="/tab2">
-								<IonIcon aria-hidden="true" icon={ellipse} />
-								<IonLabel>Tab 2</IonLabel>
-							</IonTabButton>
-							<IonTabButton tab="tab3" href="/tab3">
-								<IonIcon aria-hidden="true" icon={square} />
-								<IonLabel>Tab 3</IonLabel>
-							</IonTabButton>
-						</IonTabBar>
-					)}
-				</IonRouterOutlet>
-			</IonTabs>
+			{isPlatform('desktop') ? (
+				<>
+					<IonRouterOutlet>
+						<Routes />
+					</IonRouterOutlet>
+					<IonMenu contentId="main-content">
+						<IonHeader>
+							<IonToolbar>
+								<IonTitle>Menu Content</IonTitle>
+							</IonToolbar>
+						</IonHeader>
+						<IonContent className="ion-padding">
+							This is the menu content.
+						</IonContent>
+					</IonMenu>
+					<IonPage id="main-content">
+						<IonHeader>
+							<IonToolbar>
+								<IonButtons slot="start">
+									<IonMenuButton />
+								</IonButtons>
+								<IonTitle>Menu</IonTitle>
+							</IonToolbar>
+						</IonHeader>
+						<IonContent className="ion-padding">
+							Tap the button in the toolbar to open the menu.
+						</IonContent>
+					</IonPage>
+				</>
+			) : (
+				<IonTabs>
+					<IonRouterOutlet>
+						<Routes />
+					</IonRouterOutlet>
+					<IonTabBar slot="bottom">
+						<IonTabButton tab="tab1" href="/tab1">
+							<IonIcon aria-hidden="true" icon={triangle} />
+							<IonLabel>Tab 1</IonLabel>
+						</IonTabButton>
+						<IonTabButton tab="tab2" href="/tab2">
+							<IonIcon aria-hidden="true" icon={ellipse} />
+							<IonLabel>Tab 2</IonLabel>
+						</IonTabButton>
+						<IonTabButton tab="tab3" href="/tab3">
+							<IonIcon aria-hidden="true" icon={square} />
+							<IonLabel>Tab 3</IonLabel>
+						</IonTabButton>
+					</IonTabBar>
+				</IonTabs>
+			)}
 		</IonReactRouter>
 	</IonApp>
 );
