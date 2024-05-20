@@ -19,7 +19,6 @@ import {
 	setupIonicReact,
 } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
-import { airplane, locate, map } from 'ionicons/icons';
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -49,6 +48,7 @@ import '@ionic/react/css/display.css';
 // import '@ionic/react/css/palettes/dark.system.css';
 
 /* Theme variables */
+import 'leaflet/dist/leaflet.css';
 import './theme/variables.css';
 import './theme/global.css';
 
@@ -74,6 +74,7 @@ const App: React.FC = () => (
 										<IonItem
 											key={item.url}
 											routerLink={item.url}
+											lines="none"
 										>
 											<IonIcon
 												aria-hidden="true"

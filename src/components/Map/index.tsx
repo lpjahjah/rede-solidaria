@@ -1,39 +1,49 @@
-import { IonSpinner } from '@ionic/react';
-import { GoogleMap, useJsApiLoader, Marker } from '@react-google-maps/api';
-
+import { useMemo, useRef, useState } from 'react';
+import { useIonViewDidEnter } from '@ionic/react';
+import { MapContainer, Marker, Popup, TileLayer, Tooltip } from 'react-leaflet';
+import { LatLngExpression, Map as LeafletMap } from 'leaflet';
 import './style.css';
+import Modal from '../Modal';
+
+const region: LatLngExpression = [-30.1, -53.2];
+
+const location: LatLngExpression = [-28.727988525871172, -52.84359948447916];
 
 const Map: React.FC = () => {
-	const { isLoaded } = useJsApiLoader({
-		id: 'google-map-script',
-		googleMapsApiKey: 'AIzaSyDmjiGeVDbFDjD-jFvUtmx7eenD-Bx8ZXo',
+	const [openModal, setOpenModal] = useState(false);
+	const map = useRef<LeafletMap>(null);
+
+	useIonViewDidEnter(() => {
+		if (map.current) map.current.invalidateSize();
 	});
 
-	const casaDosAvos = {
-		lat: -28.727988525871172,
-		lng: -52.84359948447916,
-	};
+	const eventHandlers = useMemo(
+		() => ({
+			click() {
+				setOpenModal(true);
+			},
+		}),
+		[]
+	);
 
 	return (
-		<div className="map">
-			{isLoaded ? (
-				<GoogleMap
-					mapContainerStyle={{
-						width: '100%',
-						height: '100%',
-					}}
-					center={{
-						lat: -29.345455,
-						lng: -52.876749,
-					}}
-					zoom={7}
-				>
-					<Marker position={casaDosAvos} />
-				</GoogleMap>
-			) : (
-				<IonSpinner />
-			)}
-		</div>
+		<>
+			<MapContainer ref={map} center={region} zoom={7} className="map">
+				<TileLayer
+					url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+					attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+					minZoom={7}
+					maxZoom={19}
+				/>
+				<Marker position={location} eventHandlers={eventHandlers}>
+					{/* <Popup>Essa é a casa dos avós do LH.</Popup> */}
+					<Tooltip>Casa dos avós do LH.</Tooltip>
+				</Marker>
+			</MapContainer>
+			<Modal title="Lugar" open={openModal} setOpen={setOpenModal}>
+				<h1>DESCRIÇÃO</h1>
+			</Modal>
+		</>
 	);
 };
 
