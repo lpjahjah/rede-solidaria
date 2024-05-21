@@ -3,6 +3,7 @@ import {
 	IonContent,
 	IonHeader,
 	IonIcon,
+	IonImg,
 	IonItem,
 	IonLabel,
 	IonList,
@@ -53,6 +54,7 @@ import './theme/variables.css';
 import './theme/global.css';
 
 import Routes, { menuItems } from './Routes';
+import LogoRedeSolidaria from './assets/LogoRedeSolidariaBrancoSemEscrita.png';
 
 setupIonicReact();
 
@@ -64,7 +66,8 @@ const App: React.FC = () => (
 					<IonSplitPane contentId="main">
 						<IonMenu contentId="main">
 							<IonHeader>
-								<IonToolbar>
+								<IonToolbar className='toolbar'>
+									<IonImg src={LogoRedeSolidaria} />
 									<IonTitle>Rede Solidária</IonTitle>
 								</IonToolbar>
 							</IonHeader>
